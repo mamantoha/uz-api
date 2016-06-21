@@ -30,18 +30,18 @@ module UZ
     end
 
     # Form data:
-    #   station_id_from: '2218000',
-    #   station_id_till: '2218300',
-    #   station_from: 'Львів',
-    #   station_till: 'Тернопіль',
-    #   date_dep: '20.06.2016',
-    #   time_dep: '00:00',
-    #   time_dep_till:'',
-    #   another_ec: '0',
-    #   search: ''
+    #   [1] station_id_from: '2218000',
+    #   [2] station_id_till: '2218300',
+    #       station_from: 'Львів',
+    #       station_till: 'Тернопіль',
+    #   [3] date_dep: '20.06.2016',
+    #   [4] time_dep: '00:00',
+    #       time_dep_till:'',
+    #       another_ec: '0',
+    #       search: ''
     #
-    # Returns array of trains.
-    # Each train represet as above:
+    # Returns a list of trains running on the specified route
+    # Each train represets as above:
     #   {
     #     "num"=>"136Ш",
     #     "model"=>0,
@@ -97,19 +97,19 @@ module UZ
     end
 
     # Form data:
-    #   station_id_from: 2218300
-    #   station_id_till: 2218000
-    #   train: 111О
-    #   coach_type: Л
-    #   model: 0
-    #   date_dep: 1466416620
-    #   round_trip: 0
-    #   another_ec: 0
+    #   [1] station_id_from: 2218300
+    #   [2] station_id_till: 2218000
+    #   [3] train: 111О
+    #   [4] coach_type: Л
+    #   [5] model: 0
+    #   [6] date_dep: 1466416620
+    #       round_trip: 0
+    #       another_ec: 0
     #
     # Example request:
-    #   UZ::API#search_coaches('2218300', '2218000', '238Ш', 'П', '1466465400')
+    #   UZ::API#search_coaches('2218300', '2218000', '238Ш', 0, 'П', '1466465400')
     #
-    # Returns something like above:
+    # Returns a list of coaches of this type with the number of free places and the price:
     #   {
     #     "coach_type_id"=>4,
     #     "coaches"=>[
@@ -143,15 +143,15 @@ module UZ
     #   }
     #
     #
-    def search_coaches(station_id_from, station_id_to, train, coach_type, date_dep)
+    def search_coaches(station_id_from, station_id_to, train, model, coach_type, date_dep)
       # timestamp = date_dep.to_time_to_i
       path = "/purchase/coaches/"
       payload = {
         station_id_from: station_id_from,
         station_id_till: station_id_to,
         train: train,
+        model: model,
         coach_type: coach_type,
-        model: 0,
         date_dep: date_dep,
       }
 
@@ -161,7 +161,6 @@ module UZ
       data.delete('content')
       data
     end
-
 
     # Show available places in a coach.
     #
@@ -178,7 +177,7 @@ module UZ
     # Example request:
     #   UZ::API#show_coach('2218300', '2218000', '136Ш', '16', 'Б', 4, '1466465400')
     #
-    # Returns:
+    # Returns a list of coaches of this type with the number of free places and the price:
     #   {"places"=>{"Б"=>["34", "36"]}}
     #
     def show_coach(station_id_from, station_id_to, train, coach_num, coach_class, coach_type_id, date_dep)
