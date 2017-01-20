@@ -186,8 +186,11 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/uz-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+## License and Author
 
-## License
+Author: Anton Maminov (anton.maminov@gmail.com)
+
+Copyright: 2016-2017 Anton Maminov (anton.maminov@gmail.com)
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
