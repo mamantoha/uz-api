@@ -1,3 +1,4 @@
+require 'json'
 require 'mechanize'
 require 'jjdecoder'
 require 'byebug'
@@ -11,7 +12,7 @@ module UZ
   class API
     attr_reader :token
 
-    JJ_ENCODE_PATTERN = /;_gaq.push\(\[\'_trackPageview\'\]\);(.+)\(function/i
+    JJ_ENCODE_PATTERN = /0\);}\);(.+)<\/script>/i
     TOKEN_PATTERN = /localStorage.setItem\(\"gv-token\", \"(\w+)\"\);/i
 
     # Create a new API object using the given parameters
