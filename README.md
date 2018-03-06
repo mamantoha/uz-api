@@ -1,5 +1,8 @@
 # UZ::API
 
+> Due to the API changes this code does not work anymore,
+> I am going to archive this project soon.
+
 [![Code Climate][codeclimate_badge]][codeclimate]
 
 A Ruby interface to the Ukrzaliznytsia API (http://booking.uz.gov.ua/)
